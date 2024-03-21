@@ -1,0 +1,92 @@
+$light-blue: rgb(220, 237, 252);
+$dark-blue: rgba(13, 84, 150, 0.066);
+$light-gray: rgba(255, 248, 248, 0.541);
+
+.detail-container {
+    padding: 20px 0;
+    max-width: 900px;
+    margin: auto;
+
+    h1 {
+        margin-bottom: 40px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    svg {
+        font-size: 20px;
+        padding: 10px;
+        margin: 5px;
+        cursor: pointer;
+
+        &:hover {
+            border-radius: 50%;
+            background-color: $dark-blue;
+        }
+    }
+}
+
+.content {
+    p {
+        line-height: 25px;
+        margin-top: 30px;
+        text-align: justify;
+    }
+}
+
+.author {
+    display: flex;
+    justify-content: space-between;
+}
+
+.description {
+    margin: 30px 0 50px 0;
+}
+
+.menu-hidden {
+    display: none;
+}
+
+.recomendation {
+    margin: 80px 0 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h4 {
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+}
+
+.posts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.detail-card {
+    padding: 10px;
+    max-width: 350px;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: -10px 10px 20px $dark-blue;
+    background-color: $light-gray;
+}

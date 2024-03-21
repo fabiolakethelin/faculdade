@@ -1,0 +1,86 @@
+$light-blue: rgb(220, 237, 252);
+$dark-blue: rgba(13, 84, 150, 0.91);
+$light-gray: rgba(228, 223, 223, 0.092);
+
+.comment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: $light-gray;
+    padding: 10px;
+
+
+    .star-rating {
+        margin-bottom: 10px;
+    
+        span {
+            cursor: pointer;
+            font-size: 24px;
+            color: #ccc;
+        }
+    
+        span:hover, span.filled {
+            color: #ffca28;
+        }
+    }
+
+    .react-quill {
+        height: 200px;
+        margin: 15px 0 80px 0;
+    }
+      
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: $dark-blue;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+      
+    button:hover {
+        background-color: $light-blue;
+        color: black;
+    }
+
+    .users-comment {
+        margin-top: 80px;
+        width: 90%;
+
+        .star {
+            span {
+                font-size: 16px;
+                color: #ccc;
+            }
+            span.filled {
+                color: #ffca28;
+            }
+        }
+
+        .comment {
+            border-bottom: 1px solid #ccc;
+            margin: 70px 0 30px;
+            padding: 10px;
+        }
+        
+        .author {
+            font-weight: bold;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        
+        .description {
+            margin-bottom: 5px;
+            text-align: left;
+        }
+          
+        .timestamp {
+            color: #666;
+            font-size: 0.8rem;
+            text-align: right;
+        }
+    }
+  }

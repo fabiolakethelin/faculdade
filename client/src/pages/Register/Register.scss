@@ -1,0 +1,90 @@
+$light-blue: rgb(220, 237, 252);
+$dark-blue: rgb(13, 83, 150);
+$light-gray: rgb(255, 248, 248);
+$dark-red: rgb(255 45 45);
+$url-img: '../../assets/background.jpg';
+
+.login-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: $light-blue;
+    background-image: linear-gradient(to right, rgba(11, 11, 67, 0.455) 75%, $light-blue 25%), url($url-img);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; //(21, 21, 52, 0.422)
+    padding: 0px 40px 0 40px;
+
+    p {
+        color: white;
+        font-size: 20px;
+        line-height: 25px;
+        max-width: 45%;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        background-color: $light-gray;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        gap: 25px;
+    }
+
+    h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    input {
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    button {
+        border: none;
+        border-radius: 5px;
+        background-color: $dark-blue;
+        padding: 10px;
+        font-size: 15px;
+        color: white;
+        cursor: pointer;
+    }
+
+    span {
+        font-size: 13px;
+    }
+
+    a {
+        color: $dark-blue;
+        font-weight: bold;
+        text-decoration: none;
+    }
+}
+
+.error-message {
+    background-color: $dark-red;
+    color: white;
+    padding: 15px 10px 10px 10px;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    clip-path: polygon(96% 14%, 100% 1%, 100% 100%, 0% 100%, 0 51%, 0 14%);
+    border-radius: 10px 0 5px 5px;
+}
+
+.success-message {
+    background-color: $dark-blue;
+    color: white;
+    padding: 15px 10px 10px 10px;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    clip-path: polygon(96% 14%, 100% 1%, 100% 100%, 0% 100%, 0 51%, 0 14%);
+    border-radius: 10px 0 5px 5px;
+}
