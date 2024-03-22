@@ -23,12 +23,11 @@ $light-gray: rgba(255, 248, 248, 0.541);
 
 .detail {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     padding: 20px;
     margin-bottom: 60px;
     border-radius: 20px;
-    max-width: 500px;
+    width: 500px;
     box-shadow: -10px 10px 20px $dark-blue;
     background-color: $light-gray;
 
@@ -39,6 +38,7 @@ $light-gray: rgba(255, 248, 248, 0.541);
 
     p {
         padding: 20px 0;
+        word-wrap: break-word;
     }
 }
 

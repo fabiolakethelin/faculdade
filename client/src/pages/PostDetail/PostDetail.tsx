@@ -132,7 +132,7 @@ const PostDetail = () => {
                     )}
                 </div>
             </div>
-            <Comment postId={id} />
+            <Comment key={id} postId={id} />
         </div>
     )
 }
