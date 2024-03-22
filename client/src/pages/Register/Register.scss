@@ -14,7 +14,7 @@ $url-img: '../../assets/background.jpg';
     background-image: linear-gradient(to right, rgba(11, 11, 67, 0.455) 75%, $light-blue 25%), url($url-img);
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat; //(21, 21, 52, 0.422)
+    background-repeat: no-repeat;
     padding: 0px 40px 0 40px;
 
     p {

@@ -6,7 +6,7 @@ import PostEditor from './pages/PostEditor/PostEditor.tsx'
 import PostDetail from './pages/PostDetail/PostDetail.tsx'
 import NavBar from './components/NavBar/NavBar.tsx'
 import Footer from './components/Footer/Footer.tsx'
-import Contact from './pages/Contact/Contact.jsx'
+import Contact from './pages/Contact/Contact.tsx'
 import About from './pages/About/About.tsx'
 
 

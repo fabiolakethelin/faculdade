@@ -4,7 +4,7 @@ import './PostDetail.scss'
 import { MdDelete } from "react-icons/md"
 import { MdModeEdit } from "react-icons/md"
 import axios from "axios"
-import { decodeToken, formatDate } from "../../utils/Global.ts"
+import { decodeToken, formatDate, getToken } from "../../utils/Global.ts"
 import Comment from "../../components/Comment/Comment.tsx"
 
 const PostDetail = () => {
@@ -16,10 +16,7 @@ const PostDetail = () => {
     const [posts, setPosts] = useState<any>([])
     const [isVisible, setIsVisible] = useState(false)
     
-    const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('token='))
-        ?.split('=')[1]
+    const token = getToken()
 
     if (!token) {
         navigate('/login')
@@ -71,7 +68,7 @@ const PostDetail = () => {
         }
     
         fetchPost()
-    }, [id, navigate])
+    }, [id])
 
     const handleDeletePost = async () => {
 

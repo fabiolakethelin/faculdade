@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './EmailMessage.scss'
 import { useNavigate } from "react-router-dom"
 
 const EmailMessage = ({ message, onClose }) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    setTimeout(() => {
-        navigate(`/`)
-      }, 1000)
+  setTimeout(() => {
+    navigate(`/`)
+  }, 1000)
 
   return (
     <div className="message-container">

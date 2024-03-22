@@ -4,6 +4,8 @@ import './Contact.scss'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import EmailMessage from "../../components/EmailMessage/EmailMessage.tsx"
+import { getToken } from '../../utils/Global.ts'
+import dotenv from 'dotenv'
 
 const Contact = () => {
 
@@ -23,17 +25,14 @@ const Contact = () => {
             email: email
         }
 
-        const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('token='))
-        ?.split('=')[1]
+        const token = getToken()
 
         if (!token) {
-        navigate('/login')
+            navigate('/login')
         }
 
         try {
-            emailjs.send("service_76hwctq", "template_7cble4o", templateParams, "XnQMRyfMBxrwWWJb6")
+            emailjs.send(String(process.env.REACT_APP_SERVER), "template_7cble4o", templateParams, String(process.env.REACT_APP_KEY))
             .then((resp) => {
                 setName('')
                 setEmail('')
@@ -42,15 +41,15 @@ const Contact = () => {
 
             await axios.post(`http://localhost:3001/api/email`, {name, email, message}, {
                 headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
                 withCredentials: true
             })
 
             setShowMessage(true)
 
-        }catch (error) {
+        } catch (error) {
            console.log(error)
         }
     }
@@ -81,7 +80,7 @@ const Contact = () => {
                   required
                 />
                 <button>Enviar</button>
-                {showMessage && <EmailMessage message="Email enviado com sucesso!" />}
+                {showMessage && <EmailMessage message="Email enviado com sucesso!" onClose={handleSubmit} />}
             </form>
         </div>
     )

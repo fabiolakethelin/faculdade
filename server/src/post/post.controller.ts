@@ -16,7 +16,6 @@ export class PostController {
 
   @Put(':id')
   async update(@Param('id') id: number, @Body() postDto: PostDto) {
-    console.log(postDto)
     return await this.postService.update(id, postDto)
   }
 

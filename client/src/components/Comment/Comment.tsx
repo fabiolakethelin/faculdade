@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css'
 import './Comment.scss'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
-import { decodeToken, formatDate } from '../../utils/Global.ts'
+import { decodeToken, formatDate, getToken, getUser } from '../../utils/Global.ts'
 
 
 const Comment = ({postId}) => {
@@ -15,15 +15,9 @@ const Comment = ({postId}) => {
 
   const navigate = useNavigate()
 
-  const token = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('token='))
-    ?.split('=')[1]
+  const token = getToken()
 
-  const perfil = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('user='))
-    ?.split('=')
+  const perfil = getUser()
 
   if (!token) {
     navigate('/login')
@@ -32,14 +26,6 @@ const Comment = ({postId}) => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const token = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('token='))
-        ?.split('=')[1]
-    
-        if (!token) {
-          navigate('/login')
-        }
 
         const comments = await axios.get(`http://localhost:3001/api/comment/getByPostId/${postId}`, {
           headers: {
@@ -52,11 +38,7 @@ const Comment = ({postId}) => {
         setComments(comments.data)
       }
       catch (error) {
-        if (error.response && error.response.status === 401) {
-          navigate('/login')
-        } else {
-          console.error(error)
-        }
+        console.error(error)
       }
     }
 
@@ -68,23 +50,16 @@ const Comment = ({postId}) => {
     setHoveredRating(0)
   }
 
-  const handleMouseOver = (hoveredStar) => {
-    setHoveredRating(hoveredStar)
-  }
+  const handleMouseOver = (hoveredStar) => setHoveredRating(hoveredStar)
 
-  const handleMouseLeave = () => {
-    setHoveredRating(0)
-  }
+  const handleMouseLeave = () => setHoveredRating(0)
 
-  const handleCommentChange = (value) => {
-    setComment(value)
-  }
+  const handleCommentChange = (value) => setComment(value)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
     try {
-      console.log(perfil)
       const params = {
         description: comment.replace(/<p>/g, '').replace(/<\/p>/g, '\n'),
         created_at: new Date(),
@@ -111,49 +86,44 @@ const Comment = ({postId}) => {
 
   return (
     <div className="comment-container">
-        <h4>Deixe seu comentário!</h4>
-        <div>
-            <div className="star-rating">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <span
-                  key={star}
-                  className={(star <= (hoveredRating || rating) ? 'filled' : 'empty')}
-                  onClick={() => handleRatingChange(star)}
-                  onMouseOver={() => handleMouseOver(star)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  &#9733;
-                </span>
-              ))}
-            </div>
-            <div>
-              <ReactQuill theme="snow" value={comment} onChange={handleCommentChange} className="react-quill" />
-            </div>
-            <button onClick={handleSubmit}>Enviar</button>
-        </div>
-        <div className='users-comment'>
-          {comments && comments.map(comment => (
-            <div key={comment.id} className="comment">
-              <div className="info">
-                <div className='author'>
-                  <span>{comment.author}</span>
-                  <div className="star">
-                    {Array.from({ length: 5 }, (_, index) => (
-                      <span
-                        key={index}
-                        className={index < comment.star_rating ? 'star filled' : 'star'}
-                      >
-                        &#9733;
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <span className="timestamp">{formatDate(comment.created_at)}</span>
-              </div>
-              <div className="description">{comment.description}</div>
-            </div>
+      <h4>Deixe seu comentário!</h4>
+      <div>
+        <div className="star-rating">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <span
+              key={star}
+              className={(star <= (hoveredRating || rating) ? 'filled' : 'empty')}
+              onClick={() => handleRatingChange(star)}
+              onMouseOver={() => handleMouseOver(star)}
+              onMouseLeave={handleMouseLeave}
+            >
+              &#9733;
+            </span>
           ))}
         </div>
+        <div>
+          <ReactQuill theme="snow" value={comment} onChange={handleCommentChange} className="react-quill" />
+        </div>
+        <button onClick={handleSubmit}>Enviar</button>
+      </div>
+      <div className='users-comment'>
+        {comments && comments.map(comment => (
+          <div key={comment.id} className="comment">
+            <div className="info">
+              <div className='author'>
+                <span>{comment.author}</span>
+                <div className="star">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <span className={index < comment.star_rating ? 'star filled' : 'star'}>&#9733;</span>
+                  ))}
+                </div>
+              </div>
+              <span className="timestamp">{formatDate(comment.created_at)}</span>
+            </div>
+            <div className="description">{comment.description}</div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

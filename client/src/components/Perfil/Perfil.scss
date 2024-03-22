@@ -3,41 +3,40 @@ $dark-blue: rgb(13, 83, 150);
 $light-gray: rgba(255, 248, 248, 0.985);
 
 .perfil {
-    display: flex;
-    position: relative;
-  }
+  display: flex;
+  position: relative;
+}
   
-  .list-container {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: $light-gray;
-    border-radius: 0 0 10px 10px;
-  }
+.list-container {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: $light-gray;
+  border-radius: 0 0 10px 10px;
+}
   
-  .perfil:hover .list-container {
-    display: block;
-  }
+.perfil:hover .list-container {
+  display: block;
+}
   
-  .list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
   
-  .list li {
-    padding: 10px;
-    cursor: pointer;
-  }
+.list li {
+  padding: 10px;
+  cursor: pointer;
+}
   
-  .list li:hover {
-    background-color: rgba(245, 222, 179, 0.448);
-  }
+.list li:hover {
+  background-color: rgba(245, 222, 179, 0.448);
+}
 
-  .perfil:hover span {
-    background-color: $light-gray; 
-    border: none;
-  }
-  
+.perfil:hover span {
+  background-color: $light-gray; 
+  border: none;
+}

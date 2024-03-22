@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
-import { decodeToken } from "../../utils/Global.ts"
+import { decodeToken, getToken, getUser } from "../../utils/Global.ts"
 
 const PostEditor = () => {
 
@@ -17,15 +17,9 @@ const PostEditor = () => {
     const [category, setCategory] = useState<any>([])
     const [loading, setLoading] = useState(false);
 
-    const token = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('token='))
-    ?.split('=')[1]
+    const token = getToken()
 
-    const perfil = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('user='))
-      ?.split('=')
+    const perfil = getUser()
 
     if (!token) {
       navigate('/login')

@@ -15,8 +15,8 @@ export const NavBar = () => {
       </div>
       <div className="menu">
         <Link to={'/'}>Inicio</Link>
-          <Link to={'/editor'}>Criar post</Link>
-          {<Perfil />}
+        <Link to={'/editor'}>Criar post</Link>
+        {<Perfil />}
       </div>
     </nav>
   )
