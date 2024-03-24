@@ -81,7 +81,7 @@ const Home = () => {
                             <Link to={`post/${post.Id}`}>
                                 <div className="content">
                                     <h2>{post.title}</h2>
-                                    <p>{post.description.substring(0, 350) + '...'}</p>
+                                    <div dangerouslySetInnerHTML={{ __html: post && post.description.substring(0, 350) + '...' }} />
                                 </div>
                                 <div className="info">
                                     <div className="category">

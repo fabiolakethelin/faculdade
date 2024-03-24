@@ -109,9 +109,7 @@ const PostDetail = () => {
                     <span>Postado em {post.created_at && formatDate(post.created_at)}</span>
                 </div>
                 <div className="description">
-                    {post.description && post.description.split('\n').map((paragraph, index) => (
-                        <p key={index}>{paragraph}</p>
-                    ))}
+                    <div dangerouslySetInnerHTML={{ __html: post && post.description }} />
                 </div>
                <div className="categories">
                 {post.categories && post.categories.split(',').map((category) =>
@@ -127,7 +125,7 @@ const PostDetail = () => {
                     {posts.slice(0, 4).map((post) =>
                         <Link to={`/post/${post.Id}`} className="detail-card">
                             <h4>{post.title}</h4>
-                            <p>{post.description.substring(0, 250) + '...'}</p>
+                            <p dangerouslySetInnerHTML={{ __html: post && post.description.substring(0, 250) + '...' }} />
                         </Link>
                     )}
                 </div>

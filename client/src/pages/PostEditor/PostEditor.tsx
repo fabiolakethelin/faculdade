@@ -103,7 +103,6 @@ const PostEditor = () => {
 
     try {
       setLoading(true)
-      post.description = post.description.replace(/<p>/g, '').replace(/<\/p>/g, '\n')
 
       if (id) {
         await axios.put(`http://localhost:3001/api/post/${id}`, post, {

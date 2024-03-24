@@ -120,7 +120,7 @@ const Comment = ({postId}) => {
               </div>
               <span className="timestamp">{formatDate(comment.created_at)}</span>
             </div>
-            <div className="description">{comment.description}</div>
+            <div className="description" dangerouslySetInnerHTML={{ __html: comment && comment.description }} />
           </div>
         ))}
       </div>
