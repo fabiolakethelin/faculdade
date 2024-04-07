@@ -5,7 +5,7 @@ import './Comment.scss'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import { decodeToken, formatDate, getToken, getUser } from '../../utils/Global.ts'
-
+import { MdDelete } from "react-icons/md"
 
 const Comment = ({postId}) => {
   const [rating, setRating] = useState(0)
@@ -36,6 +36,13 @@ const Comment = ({postId}) => {
         })
         
         setComments(comments.data)
+
+        const decodedToken = decodeToken(token as string)
+        
+        setComments(comments.data.map(comment => ({
+          ...comment,
+          isVisible: comment.userId === decodedToken.Id
+        })))
       }
       catch (error) {
         console.error(error)
@@ -84,6 +91,28 @@ const Comment = ({postId}) => {
     }
   }
 
+  const handleDelete = async (id: number) => {
+
+    try {
+      await axios.delete(`http://localhost:3001/api/comment/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true
+      })
+
+      window.location.reload()
+    } 
+    catch (error) {
+      if (error.response && error.response.status === 401) {
+        navigate('/login')
+      } else {
+        console.error(error)
+      }
+    }
+  }
+
   return (
     <div className="comment-container">
       <h4>Deixe seu comentário!</h4>
@@ -118,7 +147,12 @@ const Comment = ({postId}) => {
                   ))}
                 </div>
               </div>
-              <span className="timestamp">{formatDate(comment.created_at)}</span>
+              <div className='menu-container'>
+                <span className="timestamp">{formatDate(comment.created_at)}</span>
+                <div className={comment.isVisible ? "menu" : "hidden"}>
+                  <MdDelete onClick={() => handleDelete(comment.Id)}/>
+                </div>
+              </div>
             </div>
             <div className="description" dangerouslySetInnerHTML={{ __html: comment && comment.description }} />
           </div>

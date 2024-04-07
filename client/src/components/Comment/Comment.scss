@@ -81,6 +81,27 @@ $light-gray: rgba(228, 223, 223, 0.092);
             color: #666;
             font-size: 0.8rem;
             text-align: right;
+            margin-right: 25px;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 120px;
+            justify-content: space-between;
+
+            .menu svg {
+                cursor: pointer;
+        
+                &:hover {
+                    border-radius: 50%;
+                }
+            }
+    
+            .hidden {
+                display: none;
+            }
         }
     }
   }
